@@ -21,28 +21,28 @@ class Group{
   has(element){
     return this.value.indexOf(element) >= 0;
   }
-}
-// make Group iterable
-// make a groupIterator class to generate a groupIterator Object
-class groupIterator{
-  constructor( group ) {
+  [Symbol.iterator]() {
     this.runningLength = -1;
-    this.arr = group.value;
+    return this;
   }
 
   next() {
-    if ( this.runningLength + 1 === this.arr.length ) {
-      return {done: true, value: null};
+    if (this.runningLength + 1 === this.value.length) {
+      return {
+        done: true,
+        value: null
+      };
     } else {
       this.runningLength += 1;
-      return {done:false, value: this.arr[ this.runningLength ] };
+      return {
+        done: false,
+        value: this.value[this.runningLength]
+      };
     }
   }
 }
-
-Group.prototype[Symbol.iterator] = function () {
-  return new groupIterator(this);
-}
+// make Group iterable
+// make a groupIterator class to generate a groupIterator Object
 
 for (let value of Group.from(["a", "b", "c"])) {
   console.log(value);
