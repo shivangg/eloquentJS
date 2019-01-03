@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+
+</head>
+<body>
+  <h1>Mountains</h1>
+  
+  <div id="mountains">
+  
+  </div>
+  
+  <script>
+
+    "use strict"
+
+    const MOUNTAINS = [{
+      name: "Kilimanjaro",
+      height: 5895,
+      place: "Tanzania"
+    },
+    {
+      name: "Everest",
+      height: 8848,
+      place: "Nepal"
+    },
+    {
+      name: "Mount Fuji",
+      height: 3776,
+      place: "Japan"
+    },
+    {
+      name: "Vaalserberg",
+      height: 323,
+      place: "Netherlands"
+    },
+    {
+      name: "Denali",
+      height: 6168,
+      place: "United States"
+    },
+    {
+      name: "Popocatepetl",
+      height: 5465,
+      place: "Mexico"
+    },
+    {
+      name: "Mont Blanc",
+      height: 4808,
+      place: "Italy/France"
+    }
+    ];
+
+    // Your code here
+
+    let mts = document.getElementById('mountains');
+    let tbl = document.createElement('table');
+    let trow = document.createElement('tr');
+    let properties = [];
+
+    for (let heading of Object.keys(MOUNTAINS[0])) {
+      let tableHeading = document.createElement('th');
+      tableHeading.innerHTML = heading;
+      properties.push(heading);
+      trow.appendChild(tableHeading);
+    }
+    tbl.appendChild(trow);
+
+    for (let mountain of MOUNTAINS) {
+      let tableRow = document.createElement('tr');
+
+      for (let mountainData of properties) {
+        let tableData = document.createElement('td');
+        tableData.innerHTML = mountain[mountainData];
+        tableData.setAttribute('class', mountainData);
+        tableRow.appendChild(tableData);
+      }
+
+      tbl.appendChild(tableRow);
+
+    }
+    mts.appendChild(tbl);
+
+    let heights = document.querySelectorAll( '.height' );
+
+    Array.from( heights ).map( ele => ele.style.textAlign = 'right' );
+  </script>
+</body>
+</html>
+
