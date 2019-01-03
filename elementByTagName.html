@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Element by Tagname</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+</head>
+
+<body>
+
+  <h1>Heading with a <span>span</span> element.</h1>
+  <p>A paragraph with <span>one</span>, <span>two</span>
+    spans.</p>
+
+  <script>
+    "use strict";
+
+    function byTagName(node, tagName) {
+      // Your code here.
+      tagName = tagName.toUpperCase();
+      let MatchedElements = [];
+
+      function explore(node) {
+        for (let child of node.children) {
+
+          if (child.nodeName === tagName) {
+            MatchedElements.push(child);
+          }
+
+          if (node.children.length > 0) {
+            explore(child, tagName)
+          }
+        }
+      }
+
+      explore(node);
+      return MatchedElements;
+
+    }
+
+    console.log(byTagName(document.body, "h1").length);
+    // → 1
+    console.log(byTagName(document.body, "span").length);
+    // → 3
+    let para = document.querySelector("p");
+    console.log(byTagName(para, "span").length);
+    // → 2
+  </script>
+
+</body>
+
+</html>
