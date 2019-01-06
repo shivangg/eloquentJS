@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Ballon Inflator</title>
+  <title>Balloon Inflator</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
@@ -28,13 +28,10 @@
         // explode
         balloon.innerHTML = '💥';
         window.removeEventListener('keypress', balloonMechanics);
-        window.removeEventListener('touchstart', balloonMechanics);
-        window.removeEventListener('touchmove', balloonMechanics);
-        window.removeEventListener('touchend', balloonMechanics);
 
       }
 
-      if (event.key === 'ArrowUp' || event instanceof TouchEvent) {
+      if (event.key === 'ArrowUp') {
         // increase balloon by 10 %
         balloon.style.fontSize = orig_size * 1.1 + "px";
       } else if (event.key === 'ArrowDown') {
@@ -45,9 +42,6 @@
     }
 
     window.addEventListener('keypress', balloonMechanics);
-    window.addEventListener('touchstart', balloonMechanics);
-    window.addEventListener('touchmove', balloonMechanics);
-    window.addEventListener('touchend', balloonMechanics);
   </script>
 </body>
 
