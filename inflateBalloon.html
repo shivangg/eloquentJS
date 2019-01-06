@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Ballon Inflator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+
+  <p id='balloon' >🎈</p>
+    <script>
+      "use strict";
+
+      let balloon = document.getElementById('balloon');
+      balloon.style.fontSize = 10 + "px";
+
+      window.addEventListener('keypress', event => {
+        console.log(event);
+        // to remove px
+        let orig_size = parseInt(balloon.style.fontSize, 10);
+
+        if (event.key === 'ArrowUp') {
+          // increase balloon by 10 %
+          balloon.style.fontSize = orig_size * 1.1 + "px";
+
+        } else if (event.key === 'ArrowDown') {
+          // decrease by 10 %
+          balloon.style.fontSize = orig_size * 0.9 + "px";
+        }
+
+        return;
+      });
+
+    </script>
+</body>
+</html>
