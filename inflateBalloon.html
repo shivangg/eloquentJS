@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,32 +8,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
+
 <body>
 
-  <p id='balloon' >🎈</p>
-    <script>
-      "use strict";
+  <p id='balloon'>🎈</p>
+  <script>
+    "use strict";
 
-      let balloon = document.getElementById('balloon');
-      balloon.style.fontSize = 10 + "px";
+    let balloon = document.getElementById('balloon');
+    balloon.style.fontSize = 50 + "px";
+    balloon.style.margin = 0 + "px";
+    balloon.style.textAlign = "center";
 
-      window.addEventListener('keypress', event => {
-        console.log(event);
-        // to remove px
-        let orig_size = parseInt(balloon.style.fontSize, 10);
+    let balloonMechanics = event => {
+      // to remove px
+      let orig_size = parseInt(balloon.style.fontSize, 10);
 
-        if (event.key === 'ArrowUp') {
-          // increase balloon by 10 %
-          balloon.style.fontSize = orig_size * 1.1 + "px";
+      if (parseInt(balloon.offsetHeight, 10) * 1.2 > parseInt(window.innerHeight, 10)) {
+        // explode
+        balloon.innerHTML = '💥';
+        window.removeEventListener('keypress', balloonMechanics);
+        window.removeEventListener('touchstart', balloonMechanics);
+        window.removeEventListener('touchmove', balloonMechanics);
+        window.removeEventListener('touchend', balloonMechanics);
 
-        } else if (event.key === 'ArrowDown') {
-          // decrease by 10 %
-          balloon.style.fontSize = orig_size * 0.9 + "px";
-        }
+      }
 
-        return;
-      });
+      if (event.key === 'ArrowUp' || event instanceof TouchEvent) {
+        // increase balloon by 10 %
+        balloon.style.fontSize = orig_size * 1.1 + "px";
+      } else if (event.key === 'ArrowDown') {
+        // decrease by 10 %
+        balloon.style.fontSize = orig_size * 0.9 + "px";
+      }
 
-    </script>
+    }
+
+    window.addEventListener('keypress', balloonMechanics);
+    window.addEventListener('touchstart', balloonMechanics);
+    window.addEventListener('touchmove', balloonMechanics);
+    window.addEventListener('touchend', balloonMechanics);
+  </script>
 </body>
+
 </html>
