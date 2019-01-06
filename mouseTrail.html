@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Mouse Trails</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <p id="mousePos"></p>
+
+  <style>
+    .trail {
+      /* className for the trail elements */
+      position: absolute;
+      height: 6px;
+      width: 6px;
+      border-radius: 3px;
+      background: teal;
+    }
+
+    #mousePos {
+      position: fixed;
+      left: 50%;
+      bottom: 10px;
+      text-align: center;
+    }
+
+    body {
+      height: 300px;
+    }
+  </style>
+
+  <script>
+    "use strict";
+
+    let mousePos = document.getElementById('mousePos');
+
+    let createTrail = (PosX, PosY) => {
+      let trail = document.createElement('div');
+      trail.className = 'trail';
+      trail.style.left = PosX - 3 + "px";
+      trail.style.top = PosY - 3 + "px";
+      document.body.appendChild(trail);
+
+      setTimeout(() => {
+        document.body.removeChild(trail);
+      }, 300);
+
+    }
+
+    let drawTrail = event => {
+      mousePos.innerHTML = [event.pageX, event.pageY];
+
+      createTrail(event.pageX, event.pageY);
+
+    };
+
+    window.addEventListener('mousemove', drawTrail);
+    window.addEventListener('touchmove', drawTrail);
+  </script>
+</body>
+
+</html>
