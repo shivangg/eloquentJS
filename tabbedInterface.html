@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Tabbed Interface</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<style>
+  tab-panel,
+  #info {
+    position: absolute;
+    left: 50%;
+  }
+
+  #info {
+    top: 10%;
+  }
+</style>
+
+<body>
+  <tab-panel>
+    <div data-tabname="one">Tab one</div>
+    <div data-tabname="two">Tab two</div>
+    <div data-tabname="three">Tab three</div>
+  </tab-panel>
+  <p id="info"></p>
+  <script>
+    "use strict";
+
+    let info = document.querySelector('#info');
+
+    function asTabs(node) {
+
+      for (let child of Array.from(node.children)) {
+        let button = document.createElement('button');
+        let tabInfo = child.getAttribute('data-tabname')
+        button.setAttribute('data-tabname', tabInfo);
+        button.innerHTML = tabInfo;
+
+        button.addEventListener('click', event => {
+          info.innerHTML = event.target.getAttribute('data-tabname');
+          event.target.style.color = 'blue';
+          event.target.style.background = 'content-box';
+        });
+
+        button.addEventListener('blur', event => {
+          event.target.style.color = '';
+          event.target.style.background = ''
+        });
+
+        node.removeChild(child);
+        node.appendChild(button);
+      }
+    }
+
+    asTabs(document.querySelector("tab-panel"));
+  </script>
+</body>
+
+</html>
